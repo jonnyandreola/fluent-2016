@@ -1,26 +1,34 @@
-import React from 'react';
+import React from 'react'
 import LoginPage from './pages/login'
 import Nav from './components/nav'
-const App = ({ url }) => {
+import { connect } from 'react-redux'
 
-	let page;
-	let nav
+const App = ({url}) => {
+  let page
+  let nav
 
-	if (url === '/') {
-		page = <LoginPage/>
-	}
+  if (url === '/') {
+    page = <LoginPage/>
+  }
 
-	if (url !== '/') {
-		nav = <Nav/>
-	}
+  if (url !== '/') {
+    nav = <Nav/>
+  }
 
-	return (
-		<div>
-			{nav}
-			{page}
-		</div>
-	)
-
+  return (
+    <div>
+      {nav}
+      <div className='container'>
+        {page}
+      </div>
+    </div>
+  )
 }
 
-export default App
+const select = (state) => {
+  return {
+    ur: state.route.url
+  }
+}
+
+export default connect(select)(App)

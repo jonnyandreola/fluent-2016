@@ -1,11 +1,11 @@
 const initialState = {
-	url: '/'
+  url: '/'
 }
 
 export default (state = initialState, action) => {
-	if (action.type !== 'UPDATE_URL') {
-		return state
-	}
+  if (action.type !== 'UPDATE_URL') {
+    return state
+  }
 
-	return Object.assign({}, state, {url: action.url})
+  return Object.assign({}, state, {url: action.url})
 }
