@@ -4,7 +4,7 @@ const initialState = {
 }
 
 export default (state = initialState, action) => {
-  if (action.type !== 'UPDATE_URL') {
+  if (action.type !== UPDATE_URL) {
     return state
   }
 
