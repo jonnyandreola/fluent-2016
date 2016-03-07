@@ -27,7 +27,7 @@ const App = ({url}) => {
 
 const select = (state) => {
   return {
-    ur: state.route.url
+    url: state.route.url
   }
 }
 
