@@ -1,3 +1,4 @@
+import { UPDATE_URL } from '../actions'
 const initialState = {
   url: '/'
 }
@@ -7,5 +8,5 @@ export default (state = initialState, action) => {
     return state
   }
 
-  return Object.assign({}, state, {url: action.url})
+  return Object.assign({}, state, {url: action.payload})
 }
