@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux'
 import route from './route'
-import user from './user'
+import me from './me'
+import repos from './repos'
 
 export default combineReducers({
   route,
-  user
+  me,
+  repos
 })

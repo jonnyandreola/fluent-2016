@@ -2,8 +2,11 @@ import qs from 'query-string'
 import fetchHelper from './helpers/fetch-helper'
 
 export const UPDATE_URL = 'UPDATE_URL'
-export const updateUrl = (url) => {
-  return { type: UPDATE_URL, payload: url }
+export const updateUrl = (url, options = {replace: false}) => {
+  if (options.replace) {
+    window.history.replaceState({}, null, url)
+  }
+  return { type: UPDATE_URL, payload: url , replace: options.replace}
 }
 
 // DO_LOGIN
@@ -19,6 +22,16 @@ export const doLogin = () => {
     dispatch({ type: DO_LOGIN, url: loginUrl })
 
     window.location = loginUrl
+  }
+}
+
+// DO_LOGOUT
+export const DO_LOGOUT = 'DO_LOGOUT'
+export const doLogout = () => {
+  return (dispatch) => {
+    dispatch({ type: DO_LOGOUT })
+    window.localStorage.clear()
+    window.location = '/'
   }
 }
 
@@ -55,10 +68,28 @@ export const fetchUser = () => {
     dispatch({ type: FETCH_USER })
     fetchHelper(`/user`)
       .then((data) => {
+        window.localStorage.user = JSON.stringify(data, null, 2)
         dispatch({ type: FETCH_USER_SUCCESS, payload: data })
       })
       .catch((error) => {
         dispatch({ type: FETCH_USER_ERROR, error })
+      })
+  }
+}
+
+// FETCH_REPOS
+export const FETCH_REPOS = 'FETCH_REPOS'
+export const FETCH_REPOS_SUCCESS = 'FETCH_REPOS_SUCCESS'
+export const FETCH_REPOS_ERROR = 'FETCH_REPOS_ERROR'
+export const fetchRepos = () => {
+  return (dispatch) => {
+    dispatch({ type: FETCH_REPOS })
+    fetchHelper(`/user/subscriptions`)
+      .then((data) => {
+        dispatch({ type: FETCH_REPOS_SUCCESS, payload: data })
+      })
+      .catch((error) => {
+        dispatch({ type: FETCH_REPOS_ERROR, error })
       })
   }
 }

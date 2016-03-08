@@ -3,10 +3,12 @@ import LoginPage from './pages/login'
 import Nav from './components/nav'
 import { connect } from 'react-redux'
 import NavHelper from 'react-internal-nav'
-import { updateUrl, doLogin } from './actions'
+import { updateUrl, doLogin, doLogout } from './actions'
 import renderUrl from './helpers/render-url'
+import WatchedReposPage from './pages/watched-repos.js'
 
-const App = ({doLogin, updateUrl, url, user}) => {
+const App = (props) => {
+  const {userData, doLogin, updateUrl, url, doLogout} = props
   let page
   let nav
 
@@ -14,10 +16,12 @@ const App = ({doLogin, updateUrl, url, user}) => {
 
   if (url === '/') {
     page = <LoginPage doLogin={doLogin}/>
+  } else if (url === '/watched-repos'){
+    page = <WatchedReposPage></WatchedReposPage>
   }
 
   if (url !== '/') {
-    nav = <Nav name={user}/>
+    nav = <Nav userData={userData} doLogout={doLogout}/>
   }
 
   return (
@@ -33,8 +37,14 @@ const App = ({doLogin, updateUrl, url, user}) => {
 const select = (state) => {
   return {
     url: state.route.url,
-    user: state.user.name
+    userData: state.me.data
   }
 }
 
-export default connect(select, {updateUrl, doLogin})(App)
+const actionCreatorsToBind = {
+  updateUrl,
+  doLogin,
+  doLogout
+}
+
+export default connect(select, actionCreatorsToBind)(App)
