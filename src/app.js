@@ -6,7 +6,7 @@ import NavHelper from 'react-internal-nav'
 import { updateUrl, doLogin } from './actions'
 import renderUrl from './helpers/render-url'
 
-const App = ({doLogin, updateUrl, url, name}) => {
+const App = ({doLogin, updateUrl, url, user}) => {
   let page
   let nav
 
@@ -17,7 +17,7 @@ const App = ({doLogin, updateUrl, url, name}) => {
   }
 
   if (url !== '/') {
-    nav = <Nav name={name}/>
+    nav = <Nav name={user}/>
   }
 
   return (
