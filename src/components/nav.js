@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Nav = () => {
+const Nav = ({name}) => {
   return (
     <nav className='top-nav top-nav-light cf' role='navigation'>
       <input id='menu-toggle' className='menu-toggle' type='checkbox'/>
@@ -8,7 +8,7 @@ const Nav = () => {
       <ul className='list-unstyled list-inline cf'>
         <li>Watcher-Watcher</li>
         <li><a href='/watched-repos'>Watched</a></li>
-        <li className='pull-right'>User Name</li>
+        <li className='pull-right'>{name}</li>
       </ul>
     </nav>
   )
