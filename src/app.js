@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import NavHelper from 'react-internal-nav'
 import { updateUrl, doLogin, doLogout } from './actions'
 import renderUrl from './helpers/render-url'
-import WatchedReposPage from './pages/watched-repos.js'
+import WatchedReposPage from './pages/watched-repos'
 
 const App = (props) => {
   const {userData, doLogin, updateUrl, url, doLogout} = props
